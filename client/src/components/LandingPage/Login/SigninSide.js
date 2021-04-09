@@ -43,19 +43,18 @@ const useStyles = makeStyles((theme) => ({
 const SignInSide = () => {
   const classes = useStyles();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { addEntry } = useContext(GlobalContext);
+  const { userLogin } = useContext(GlobalContext);
 
   const onSubmit = (e) => {
-    alert("submitted");
     e.preventDefault();
     const newEntry = {
       // id: Math.floor(Math.random() * 100000000),
-      email,
+      username,
       password,
     };
-    addEntry(newEntry);
+    userLogin(newEntry);
   };
 
   return (
@@ -79,7 +78,7 @@ const SignInSide = () => {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             variant="outlined"
