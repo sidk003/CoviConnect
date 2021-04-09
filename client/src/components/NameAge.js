@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-export const LandingPage = () => {
+export const NameAge = () => {
   const [text, setText] = useState("");
   const [age, setAge] = useState(0);
 
@@ -22,7 +22,7 @@ export const LandingPage = () => {
       <h3>Input Form</h3>
       <form onSubmit={onSubmit}>
         <div className="form-control">
-          <label htmlFor="text">Name: </label>
+          <label htmlFor="text">Namee: </label>
           <input
             type="text"
             value={text}
