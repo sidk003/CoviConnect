@@ -1,22 +1,6 @@
 const User = require("../../model/user");
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const JWT_SECRET = 'hack36_CoviConnect'
-exports.addData = async (req,res) => {
-    try{
-        let user = await User.create({
-            "name": req.body.text,
-            "age" : req.body.age,
-        });
-        return res.status(201).json({
-            success: true,
-            data: user,
-        });
-    }
-    catch(e){
-        return res.status(401);
-    }
-}
 
 exports.addUser = async (req,res) => {
     const { username, password: plainTextPassword } = req.body;

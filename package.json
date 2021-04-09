@@ -1,5 +1,5 @@
 {
-  "name": "sample",
+  "name": "CoviConnect",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ujjwalgupta99/sample#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
