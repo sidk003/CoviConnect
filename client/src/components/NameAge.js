@@ -10,7 +10,7 @@ export const NameAge = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const newEntry = {
-      id: Math.floor(Math.random() * 100000000),
+      // id: Math.floor(Math.random() * 100000000),
       text,
       age,
     };

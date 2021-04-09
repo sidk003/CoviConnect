@@ -23,11 +23,14 @@ export const GlobalProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
     };
-    console.log("entry: ", entry);
 
     try {
-      const res = await axios.post("api/v1/entry", entry, config);
-
+      const res = await axios.post(
+        "http://localhost:4000/api/user/addData",
+        entry,
+        config
+      );
+      // console.log("Response: ", res.data.data);
       dispatch({
         type: "ADD_ENTRY",
         payload: res.data.data,
@@ -35,7 +38,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: "ENTRY_ERROR",
-        payload: err.response.data.error,
+        payload: err.response,
       });
     }
   }
