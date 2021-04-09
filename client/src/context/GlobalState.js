@@ -24,6 +24,8 @@ export const GlobalProvider = ({ children }) => {
       },
     };
 
+    console.log("email pass: ", entry);
+
     try {
       const res = await axios.post(
         "http://localhost:4000/api/user/addData",
