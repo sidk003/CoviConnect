@@ -1,8 +1,10 @@
 const http = require('http')
+const path = require("path");
 const express = require("express");
 const connecToDB = require("./config/db");
 const router = require("./api/user/app.router");
-var bodyParser = require('body-parser')
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
 
 connecToDB();
 const app = express();
