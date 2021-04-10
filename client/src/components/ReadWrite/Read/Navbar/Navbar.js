@@ -5,12 +5,10 @@ import {
   CssBaseline,
   Typography,
   IconButton,
-  Box,
   Button,
   Menu,
   MenuItem,
   Grid,
-  Avatar,
 } from "@material-ui/core";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import useStyles from "./Styles";
