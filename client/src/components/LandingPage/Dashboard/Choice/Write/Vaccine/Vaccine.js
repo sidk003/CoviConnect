@@ -1,23 +1,16 @@
-import React , { useState } from "react";
+import React, { useState } from "react";
 import {
-  Avatar,
   Button,
   CssBaseline,
   TextField,
-  Link,
   Grid,
   Box,
   Typography,
   makeStyles,
   Container,
   Card,
-  Select,
   MenuItem,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -26,14 +19,16 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-    alignItems: "center" ,
+    alignItems: "center",
+
+    // background:
+    //   "linear-gradient(left,  rgba(211,211,211,1) 0%, rgba(225,225,225,1) 100%)",
   },
   paper: {
     marginTop: theme.spacing(3),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginBottom: theme.spacing(3),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -48,38 +43,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export const Vaccine = () => {
   const classes = useStyles();
   const [baseImage, setBaseImage] = useState("");
-  
+
   const uploadImage = async (e) => {
     //console.log(e.target.files[0]) ;
     const file = e.target.files[0];
-    const base64file = await convertBase64(file) ;
-    console.log(base64file) ;
-    setBaseImage(base64file) ;
+    const base64file = await convertBase64(file);
+    console.log(base64file);
+    setBaseImage(base64file);
   };
-  
+
   const convertBase64 = (file) => {
-    return new Promise((resolve,reject)=>{
-      const fileReader = new FileReader() ;
-      fileReader.readAsDataURL(file) ;
-  
-      fileReader.onload = ()=>{
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
         resolve(fileReader.result);
       };
-  
-      fileReader.onerror = (error)=>{
-        reject(error) ;
+
+      fileReader.onerror = (error) => {
+        reject(error);
       };
-  
     });
   };
-  
-  
+
   return (
-    
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <Card className={classes.paper} variant="outlined">
@@ -98,7 +89,7 @@ export const Vaccine = () => {
                   fullWidth
                   id="firstName"
                   label="First Name"
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -135,7 +126,7 @@ export const Vaccine = () => {
                   id="occupation"
                   label="Occupation"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
 
@@ -148,7 +139,7 @@ export const Vaccine = () => {
                   id="locationAddress"
                   label="Address Line"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
 
@@ -162,7 +153,7 @@ export const Vaccine = () => {
                   id="locationCity"
                   label="City"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -175,7 +166,7 @@ export const Vaccine = () => {
                   id="locationState"
                   label="State"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -189,7 +180,7 @@ export const Vaccine = () => {
                   id="locationPincode"
                   label="Pincode"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
 
@@ -203,7 +194,7 @@ export const Vaccine = () => {
                   id="vaccineTaken"
                   label="Vaccine Taken"
                   // helperText="Name of Vaccine taken."
-                  // autoFocus
+                  autoFocus
                   select
                 >
                   <MenuItem value="CoviShield">Covishield</MenuItem>
@@ -211,7 +202,9 @@ export const Vaccine = () => {
                   <MenuItem value="Pfizer">Pfizer</MenuItem>
                   <MenuItem value="AstraZeneca">AstraZeneca</MenuItem>
                   <MenuItem value="Moderna">Moderna</MenuItem>
-                  <MenuItem value="Johnson &amp; Johnson's">Johnson &amp; Johnson's</MenuItem>
+                  <MenuItem value="Johnson &amp; Johnson's">
+                    Johnson &amp; Johnson's
+                  </MenuItem>
                   {/* <MenuItem value="1">1</MenuItem> */}
                 </TextField>
               </Grid>
@@ -226,7 +219,7 @@ export const Vaccine = () => {
                   id="dosesTaken"
                   label="Doses Taken"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  // autoFocus
+                  autoFocus
                   select
                 >
                   <MenuItem value="1">1</MenuItem>
@@ -243,7 +236,7 @@ export const Vaccine = () => {
                   id="hospitalName"
                   label="Hospital Name"
                   helperText="Name of Hospital/Institution for taking vaccine. "
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
@@ -269,7 +262,7 @@ export const Vaccine = () => {
                   id="symptoms"
                   label="Symptoms"
                   helperText="Symptoms/Conditions after taking vaccine. "
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
 
@@ -284,7 +277,7 @@ export const Vaccine = () => {
                   id="medicinesTaken"
                   label="Medicines Taken"
                   helperText="Medicines taken to overcome symptoms."
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
 
@@ -299,19 +292,18 @@ export const Vaccine = () => {
                   id="comments"
                   label="Additional Comments"
                   // helperText="Medicines taken to overcome symptoms."
-                  // autoFocus
+                  autoFocus
                 />
               </Grid>
 
               <Grid item xs={12} sm={12}>
-                <input 
+                <input
                   type="file"
                   onChange={(e) => {
                     uploadImage(e);
                   }}
                 />
               </Grid>
-
             </Grid>
             <Button
               type="submit"
@@ -332,8 +324,7 @@ export const Vaccine = () => {
           </form>
         </div>
         <Box mt={5}></Box>
-      </Card>  
+      </Card>
     </Container>
-    
   );
 };
