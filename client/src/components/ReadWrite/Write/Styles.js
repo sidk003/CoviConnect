@@ -10,7 +10,7 @@ export default makeStyles((theme) => ({
   image: {
     position: "relative",
     width: "35%",
-    height: "40%",
+    height: "50%",
     marginTop: 170,
     marginLeft: 140,
     [theme.breakpoints.down("xs")]: {
@@ -50,6 +50,8 @@ export default makeStyles((theme) => ({
     bottom: 0,
     backgroundSize: "cover",
     backgroundPosition: "center 40%",
+    width: "50%",
+    height: "50%",
   },
   imageBackdrop: {
     position: "absolute",

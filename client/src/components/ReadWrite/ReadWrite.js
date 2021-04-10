@@ -24,8 +24,7 @@ export const ReadWrite = () => {
               <span
                 className={classes.imageSrc}
                 style={{
-                  backgroundImage:
-                    "https://i.insider.com/5d76627f2e22af514118b142",
+                  backgroundImage: `url(${"https://i.insider.com/5d76627f2e22af514118b142"})`,
                 }}
               />
               <span className={classes.imageBackdrop} />
@@ -52,8 +51,7 @@ export const ReadWrite = () => {
               <span
                 className={classes.imageSrc}
                 style={{
-                  backgroundImage:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRUiG0G-zHv96hjOfptKwbsZ0IAu0ZEl_wdw&usqp=CAU",
+                  backgroundImage: `url(${"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRUiG0G-zHv96hjOfptKwbsZ0IAu0ZEl_wdw&usqp=CAU"})`,
                 }}
               />
               <span className={classes.imageBackdrop} />

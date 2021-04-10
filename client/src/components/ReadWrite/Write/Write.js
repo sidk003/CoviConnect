@@ -1,25 +1,3 @@
-// import React from "react";
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import { Link } from "react-router-dom";
-// import { Covid } from "./Covid/Covid";
-// import { Vaccine } from "./Vaccine/Vaccine";
-// import useStyles from "./Styles";
-
-// export const Write = () => {
-//   const classes = useStyles();
-//   return (
-//     <Router>
-//       <Switch>
-//         <Route path="/vaccine">
-//           <Vaccine path="/vaccine" component={Vaccine} />
-//         </Route>
-//         <Route path="/covid">
-//           <Covid path="/covid" component={Covid} />
-//         </Route>
-//       </Switch>
-//     </Router>
-//   );
-// };
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ButtonBase, Typography } from "@material-ui/core";
@@ -45,10 +23,11 @@ export const Write = () => {
             >
               <span
                 className={classes.imageSrc}
-                style={{
-                  backgroundImage:
-                    "https://i.insider.com/5d76627f2e22af514118b142",
-                }}
+                style={
+                  {
+                    // backgroundImage: `url(${"https://image.flaticon.com/icons/png/512/2842/2842965.png"})`,
+                  }
+                }
               />
               <span className={classes.imageBackdrop} />
               <span className={classes.imageButton}>
@@ -73,10 +52,11 @@ export const Write = () => {
             >
               <span
                 className={classes.imageSrc}
-                style={{
-                  backgroundImage:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRUiG0G-zHv96hjOfptKwbsZ0IAu0ZEl_wdw&usqp=CAU",
-                }}
+                style={
+                  {
+                    // backgroundImage: `url(${"https://image.flaticon.com/icons/png/512/2853/2853896.png"})`,
+                  }
+                }
               />
               <span className={classes.imageBackdrop} />
               <span className={classes.imageButton}>
