@@ -1,8 +1,35 @@
 const Data = require("../../model/vaccineData");
 const ocrSpace = require('ocr-space-api-wrapper');
 var jwt = require("jsonwebtoken");
+const multer = require ('multer');
+const path = require ('path');
 
-exports.addData = async (req,res) => {
+const storageEngine = multer.diskStorage ({
+    destination: './public/uploads/',
+    filename: function (req, file, callback) {
+      callback (
+        null,
+        file.fieldname + '-' + Date.now () + path.extname (file.originalname)
+      );
+    },
+  });
+
+  const fileFilter = (req, file, callback) => {
+    let pattern = /pdf/; // reqex
+
+    if (pattern.test (path.extname (file.originalname))) {
+      callback (null, true);
+    } else {
+      callback ('Error: not a valid file');
+    }
+  };
+
+  const upload = multer ({
+    storage: storageEngine,
+    fileFilter: fileFilter,
+  });
+
+exports.addVaccineData = async (req,res) => {
     const { username,name,age,occupation,vaccineTaken,dosesTaken,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState } = req.body;
     //const {   } = req.body;
     try{
@@ -23,7 +50,7 @@ exports.addData = async (req,res) => {
             locationPinCode,
             locationState,
         });
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             data: user,
         });
@@ -53,17 +80,17 @@ exports.addData = async (req,res) => {
                         
                     }
                 )
-                return res.status(201).json({
+                return res.status(200).json({
                     success: true,
                     data: response,
                 });
             }
             catch(error){
-                return res.status(401);
+                return res.status(401).json({ error: 'Something went wrong' });
             }
         }
         else{
-            return res.status(401);
+            return res.status(401).json({ error: 'Something went wrong' });
         }
         
     }
@@ -148,4 +175,15 @@ exports.getVaccineData = async (req,res) =>{
                 return res.status(404).json({ error: 'Something went wrong' })
             }       
         }
+}
+
+exports.uploadFile = async(req,res) => {
+    try{
+        await upload.single ('uploadedFile');
+            console.log(req.file)
+            res.json (req.file).status (200);
+    }
+    catch(e){
+        return res.status(404).json({ error: 'Something went wrong' })
+    }
 }
