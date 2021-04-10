@@ -14,7 +14,7 @@ export const Read = () => {
       <div>
         <CssBaseline />
         <Navbar />
-        <Route exact path="/" component={Dashboard} />
+        <Route path="/read" component={Dashboard} />
         <Route path="/covid" component={Covid} />
         <Route path="/vaccine" component={Vaccine} />
       </div>
