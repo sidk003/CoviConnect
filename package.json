@@ -7,7 +7,7 @@
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -23,11 +23,13 @@
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
+    "canvasjs-react-charts": "^1.0.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.3",
+    "multer": "^1.4.2",
     "ocr-space-api-wrapper": "^1.0.5"
   },
   "devDependencies": {
