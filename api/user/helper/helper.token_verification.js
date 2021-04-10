@@ -18,6 +18,7 @@ module.exports.tokenVerification = function () {
                 message: "access denied"
             })
           } else {
+            req.body.username = authdata.username;
             //call next middleware function
             next();
           }

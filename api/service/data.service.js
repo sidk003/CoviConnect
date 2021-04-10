@@ -1,5 +1,6 @@
 const Data = require("../../model/vaccineData");
 const ocrSpace = require('ocr-space-api-wrapper');
+var jwt = require("jsonwebtoken");
 
 exports.addData = async (req,res) => {
     const { username,name,age,occupation,vaccineTaken,dosesTaken,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState } = req.body;
@@ -69,7 +70,7 @@ exports.addData = async (req,res) => {
 }
 
  
-exports.main = async () => {
+exports.main = async (req,res) => {
   try {
     // Using the OCR.space default free token + remote file
     //const res1 = await ocrSpace('http://dl.a9t9.com/ocrbenchmark/eng.png')
@@ -88,4 +89,63 @@ exports.main = async () => {
         data:error
     });
   }
+}
+
+exports.getVaccineData = async (req,res) =>{
+        const bearerHeader = req.headers["authorization"];
+        if (bearerHeader) {
+          //if header present then retrieve token
+          const bearer = bearerHeader.split(" ");
+    
+          const bearerToken = bearer[1];
+          req.token = bearerToken;
+    
+            try{
+                await jwt.verify(req.token, process.env.JWT_SECRET , async (err, authdata) => {
+                    if (err) {
+                      return res.status(403).json({
+                          status: false,
+                          message: "invalid token"
+                      });
+                    } else {
+                      const username = authdata.username;
+                      let data = await Data.findOne({username},{_id:false,__v:false});
+        
+                      if(data){
+                        return res.status(200).json({
+                            status: true,
+                            data
+                        });
+                      }
+                      else{
+                          return res.status(204).json({
+                              message: "no data found for the username"
+                          });
+                      }
+                    }
+                  });
+            }catch(e){
+                return res.status(404).json({ error: 'Something went wrong' })
+            }
+          
+        }
+        else{
+            try{
+                let data = await Data.find({},{_id:false,__v:false});
+                if(data){
+                    return res.status(200).json({
+                        status: true,
+                        data
+                    });
+                  }
+                  else{
+                      return res.status(204).json({
+                          message: "no data found"
+                      });
+                  } 
+            }
+            catch(e){
+                return res.status(404).json({ error: 'Something went wrong' })
+            }       
+        }
 }

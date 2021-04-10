@@ -14,8 +14,8 @@ const Userschema1 = new mongoose.Schema(
         locationPinCode: { type: Number, required: true},
         locationCity: {type: String, required: true},
         locationState: {type: String, required: true},
-        symptoms: {type: String},
-        medicinesTaken: {type: String},
+        symptoms: {type: String, required: true},
+        medicinesTaken: {type: String, required: true},
         comments: {type: String},
     },
     {
