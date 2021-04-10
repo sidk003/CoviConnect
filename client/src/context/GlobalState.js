@@ -53,7 +53,7 @@ export const GlobalProvider = ({ children }) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/user/addVaccineData",
+        "https://aqueous-plains-64390.herokuapp.com/api/user/addVaccineData",
         entry,
         config
       );
