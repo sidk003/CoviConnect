@@ -1,9 +1,8 @@
-# CoviConnect
-Repository for MNNIT Hack 36
-<h1 align="center">Hack36 Template Readme</h1>
+
+<h1 align="center">CoviConnect</h1>
 <p align="center">
 </p>
-
+Repository for MNNIT Hack 36
 <a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a>
 
 
