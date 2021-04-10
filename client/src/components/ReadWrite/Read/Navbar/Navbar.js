@@ -10,6 +10,7 @@ import {
   MenuItem,
   Grid,
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import useStyles from "./Styles";
 
@@ -41,10 +42,20 @@ export const Navbar = () => {
               CoviConnect
             </Typography>
           </Grid>
-          <Button color="inherit" className={classes.buttonFontSize}>
+          <Button
+            color="inherit"
+            className={classes.buttonFontSize}
+            component={Link}
+            to={"/covid"}
+          >
             COVID
           </Button>
-          <Button color="inherit" className={classes.buttonFontSize}>
+          <Button
+            color="inherit"
+            className={classes.buttonFontSize}
+            component={Link}
+            to={"/vaccine"}
+          >
             Vaccine
           </Button>
           <IconButton

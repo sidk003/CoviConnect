@@ -15,8 +15,8 @@ export const Chart = () => {
         toolTipContent: "<b>{label}</b>: {y}%",
         showInLegend: "true",
         legendText: "{label}",
-        indexLabelFontSize: 16,
-        indexLabel: "{label} - {y}%",
+        indexLabelFontSize: 12,
+        indexLabel: "{label} - {y}",
         dataPoints: [
           { y: 18, label: "Gujarat" },
           { y: 49, label: "Maharashtra" },
