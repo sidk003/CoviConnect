@@ -3,10 +3,10 @@ const ocrSpace = require('ocr-space-api-wrapper');
 var jwt = require("jsonwebtoken");
 
 exports.addVaccineData = async (req,res) => {
-    const { username,fname,lname,age,occupation,vaccineTaken,dosesTaken,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState } = req.body;
+    const { username,fname,lname,age,occupation,vaccineTaken,dosesTaken,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState,base64file } = req.body;
     //const {   } = req.body;
     try {
-        const res3 = await ocrSpace( process.env.URL, { apiKey: 'bd623620c088957', isTable : true})
+        const res3 = await ocrSpace( base64file, { apiKey: 'bd623620c088957', isTable : true})
         var text = res3.ParsedResults[0].ParsedText;
         var parsedText = text.toLowerCase();
         console.log(parsedText);
@@ -119,13 +119,9 @@ exports.main = async (req,res) => {
 }
 
 exports.getVaccineData = async (req,res) =>{
-        const bearerHeader = req.headers["authorization"];
-        if (bearerHeader) {
-          //if header present then retrieve token
-          const bearer = bearerHeader.split(" ");
-    
-          const bearerToken = bearer[1];
-          req.token = bearerToken;
+    const token = req.query.token;
+        if (token) {
+          req.token = token;
     
             try{
                 await jwt.verify(req.token, process.env.JWT_SECRET , async (err, authdata) => {

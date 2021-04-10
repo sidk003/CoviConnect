@@ -57,15 +57,10 @@ exports.userLogin = async (req,res) => {
 
 exports.changePassword = async (req, res) => {
 	const { newpassword: plainTextPassword } = req.body
-    const bearerHeader = req.headers["authorization"];
+    const token = req.query.token;
   
-    if (bearerHeader) {
-        //if header present then retrieve token
-        const bearer = bearerHeader.split(" ");
-  
-        const bearerToken = bearer[1];
-        const token = bearerToken;
-
+    if (token) {
+        
         if (!plainTextPassword || typeof plainTextPassword !== 'string') {
             return res.json({ status: 'error', error: 'Invalid password' })
         }
