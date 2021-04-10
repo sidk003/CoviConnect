@@ -9,7 +9,8 @@ module.exports = {
       }),
       vaccineData: Joi.object({
         username: Joi.string().required(),
-        name: Joi.string().required(),
+        fname: Joi.string().required(),
+        lname: Joi.string().required(),
         age: Joi.number().required(),
         occupation: Joi.string().required(),
         vaccineTaken: Joi.string().required(),
@@ -26,7 +27,8 @@ module.exports = {
       }),
       covidData: Joi.object({
         username: Joi.string().required(),
-        name: Joi.string().required(),
+        fname: Joi.string().required(),
+        lname: Joi.string().required(),
         age: Joi.number().required(),
         occupation: Joi.string().required(),
         doctorName: Joi.string().required(),

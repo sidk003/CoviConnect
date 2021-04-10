@@ -11,6 +11,7 @@ export const Vaccine = () => {
         Users' personal insights about vaccination
       </Typography>
       <Cards className={classes.cards} />
+      <Cards className={classes.cards} />
     </div>
   );
 };

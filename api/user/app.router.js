@@ -12,7 +12,7 @@ router.post("/changePassword", changePassword);
 router.get("/image", main);
 router.post("/addVaccineData", [tokenVerification(), validationBody(schemas.vaccineData)], addVaccineData);
 router.get("/getVaccineData", getVaccineData);
-router.post("/uploadFile" , uploadFile);
+//router.post("/uploadFile" , uploadFile);
 router.post("/addCovidData", [tokenVerification(), validationBody(schemas.vaccineData)], addCovidData);
 router.get("/getVaccineData", getCovidData);
 
