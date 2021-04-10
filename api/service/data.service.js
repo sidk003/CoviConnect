@@ -75,8 +75,8 @@ exports.main = async () => {
     //const res1 = await ocrSpace('http://dl.a9t9.com/ocrbenchmark/eng.png')
  
     // Using your personal token + local file
-    const res2 = await ocrSpace('./CovidReport.pdf', { apiKey: 'bd623620c088957' })
-    console.log(res2) 
+    const res2 = await ocrSpace('./CovidReport.pdf', { apiKey: 'bd623620c088957' , isTable : true})
+    console.log(res2.ParsedResults[0].ParsedText) 
     return res.json({
         data: res2
     });
