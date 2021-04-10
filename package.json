@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.3",
+    "multer": "^1.4.2",
     "ocr-space-api-wrapper": "^1.0.5"
   },
   "devDependencies": {

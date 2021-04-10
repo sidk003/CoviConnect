@@ -5,6 +5,7 @@ const connecToDB = require("./config/db");
 const router = require("./api/user/app.router");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
+const bodyParser  = require('body-parser');
 
 connecToDB();
 const app = express();
@@ -22,9 +23,10 @@ const port = process.env.PORT || 4000;
 const server = http.createServer(app);
 
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(function (req, res, next) {
   // Mentioning content types
-  res.setHeader("Content-Type", "application/json; charset=UTF-8");
+  //res.setHeader("Content-Type", "application/json; charset=UTF-8");
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
 

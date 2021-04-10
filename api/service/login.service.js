@@ -10,7 +10,7 @@ exports.addUser = async (req,res) => {
         username,
         password
     })
-    return res.status(201).json({
+    return res.status(200).json({
         success: true,
         data: response,
     }); 
@@ -21,10 +21,10 @@ exports.addUser = async (req,res) => {
             return res.json({ status: 'error', error: 'Username already in use' })
         }
         else{
-            // return res.status(401).json({
-            //     error: 'something went wrong'
-            // })
-            throw e;
+            return res.status(401).json({
+                error: 'something went wrong'
+            })
+            //throw e;
         }
         
     }
@@ -53,4 +53,60 @@ exports.userLogin = async (req,res) => {
 	}
 
 	res.status(403).json({ status: 'error', error: 'Invalid username/password' })
+}
+
+exports.changePassword = async (req, res) => {
+	const { newpassword: plainTextPassword } = req.body
+    const bearerHeader = req.headers["authorization"];
+  
+    if (bearerHeader) {
+        //if header present then retrieve token
+        const bearer = bearerHeader.split(" ");
+  
+        const bearerToken = bearer[1];
+        const token = bearerToken;
+
+        if (!plainTextPassword || typeof plainTextPassword !== 'string') {
+            return res.json({ status: 'error', error: 'Invalid password' })
+        }
+
+        if (plainTextPassword.length < 5) {
+            return res.json({
+                status: 'error',
+                error: 'Password too small. Should be atleast 6 characters'
+            })
+        }
+
+        try {
+            const user = jwt.verify(token, process.env.JWT_SECRET)
+
+            if(user){
+                const _id = user.id
+
+                const password = await bcrypt.hash(plainTextPassword, 10)
+
+                await User.updateOne(
+                    { _id },
+                    {
+                        $set: { password }
+                    }
+                )
+                res.status(200).json({ 
+                    status: 'ok',
+                    message: "password changed" 
+                })
+            }else{
+                return res.status(403).json({
+                    message: "invalid token. Please login again"
+                });
+            }
+        } catch (e) {
+            res.status(401).json({ status: 'error', error: 'something went wrong' })
+        }
+    }
+    else{
+        return res.status(403).json({
+            message: "please login again"
+        });
+    }
 }

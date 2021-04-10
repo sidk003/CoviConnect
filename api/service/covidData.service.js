@@ -1,9 +1,36 @@
-const Data = require("../../model/vaccineData");
+const Data = require("../../model/covidData");
 const ocrSpace = require('ocr-space-api-wrapper');
 var jwt = require("jsonwebtoken");
+const multer = require ('multer');
+const path = require ('path');
 
-exports.addData = async (req,res) => {
-    const { username,name,age,occupation,vaccineTaken,dosesTaken,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState } = req.body;
+const storageEngine = multer.diskStorage ({
+    destination: './public/uploads/',
+    filename: function (req, file, callback) {
+      callback (
+        null,
+        file.fieldname + '-' + Date.now () + path.extname (file.originalname)
+      );
+    },
+  });
+
+  const fileFilter = (req, file, callback) => {
+    let pattern = /pdf/; // reqex
+
+    if (pattern.test (path.extname (file.originalname))) {
+      callback (null, true);
+    } else {
+      callback ('Error: not a valid file');
+    }
+  };
+
+  const upload = multer ({
+    storage: storageEngine,
+    fileFilter: fileFilter,
+  });
+
+exports.addCovidData = async (req,res) => {
+    const { username,name,age,occupation,doctorName,doctorMobile,doctorRating,treatment,recoveryPeriod,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState } = req.body;
     //const {   } = req.body;
     try{
         let user = await Data.create({
@@ -11,8 +38,11 @@ exports.addData = async (req,res) => {
             name,
             age,
             occupation,
-            vaccineTaken,
-            dosesTaken,
+            doctorName,
+            doctorMobile,
+            doctorRating,
+            treatment,
+            recoveryPeriod,
             hospital,
             hospitalAddress,
             symptoms,
@@ -23,7 +53,7 @@ exports.addData = async (req,res) => {
             locationPinCode,
             locationState,
         });
-        return res.status(201).json({
+        return res.status(200).json({
             success: true,
             data: user,
         });
@@ -38,8 +68,11 @@ exports.addData = async (req,res) => {
                             name,
                             age,
                             occupation,
-                            vaccineTaken,
-                            dosesTaken,
+                            doctorName,
+                            doctorMobile,
+                            doctorRating,
+                            treatment,
+                            recoveryPeriod,
                             hospital,
                             hospitalAddress,
                             symptoms,
@@ -53,17 +86,17 @@ exports.addData = async (req,res) => {
                         
                     }
                 )
-                return res.status(201).json({
+                return res.status(200).json({
                     success: true,
                     data: response,
                 });
             }
             catch(error){
-                return res.status(401);
+                return res.status(401).json({ error: 'Something went wrong' });
             }
         }
         else{
-            return res.status(401);
+            return res.status(401).json({ error: 'Something went wrong' });
         }
         
     }
@@ -91,7 +124,7 @@ exports.main = async (req,res) => {
   }
 }
 
-exports.getVaccineData = async (req,res) =>{
+exports.getCovidData = async (req,res) =>{
         const bearerHeader = req.headers["authorization"];
         if (bearerHeader) {
           //if header present then retrieve token
@@ -148,4 +181,15 @@ exports.getVaccineData = async (req,res) =>{
                 return res.status(404).json({ error: 'Something went wrong' })
             }       
         }
+}
+
+exports.uploadFile = async(req,res) => {
+    try{
+        await upload.single ('uploadedFile');
+            console.log(req.file)
+            res.json (req.file).status (200);
+    }
+    catch(e){
+        return res.status(404).json({ error: 'Something went wrong' })
+    }
 }
