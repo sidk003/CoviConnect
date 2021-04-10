@@ -11,7 +11,7 @@ export const Login = () => {
     <div className={classes.login}>
       <Router>
         <div>
-          <Route path="/" exact component={SigninSide} />
+          <Route exact path="/" component={SigninSide} />
           <Route exact path="/signup" component={SignupSide} />
         </div>
       </Router>
