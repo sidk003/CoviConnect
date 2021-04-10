@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Button,
   CssBaseline,
@@ -44,14 +44,16 @@ const useStyles = makeStyles((theme) => ({
 
 export const Vaccine = () => {
   const classes = useStyles();
-  const [baseImage, setBaseImage] = useState("");
-
+  // const [baseImage, setBaseImage] = useState("");
+  const { addVaccineData, token } = useContext(GlobalContext);
+  // console.log("Token auth: ", token);
+  var base64file = "";
   const uploadImage = async (e) => {
     //console.log(e.target.files[0]) ;
     const file = e.target.files[0];
-    const base64file = await convertBase64(file);
-    console.log(base64file);
-    setBaseImage(base64file);
+    base64file = await convertBase64(file);
+    // setBaseImage(base64file);
+    // console.log("Token64: ", base64file);
   };
 
   const convertBase64 = (file) => {
@@ -67,6 +69,16 @@ export const Vaccine = () => {
         reject(error);
       };
     });
+  };
+
+  const submit = (e) => {
+    e.preventDefault();
+    const newEntry = {
+      // id: Math.floor(Math.random() * 100000000),
+      base64file,
+    };
+    const response = addVaccineData(newEntry);
+    addVaccineData(response);
   };
 
   return (
@@ -310,6 +322,7 @@ export const Vaccine = () => {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={submit}
             >
               Submit
             </Button>
