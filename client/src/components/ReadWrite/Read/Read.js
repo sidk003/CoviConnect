@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { CssBaseline, Box, Fab, Toolbar, Container } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import { Navbar } from "./Navbar/Navbar";
 import { Dashboard } from "./Dashboard/Dashboard";
 import { Covid } from "./Covid/Covid";
