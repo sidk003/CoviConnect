@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignInSide = () => {
+const SignInSide = ({ GetLoginState }) => {
   const classes = useStyles();
 
   const [username, setUsername] = useState("");
@@ -60,6 +60,7 @@ const SignInSide = () => {
     }
     if (token) {
       setErrorMessage("Login Successful");
+      GetLoginState(true);
       console.log(token);
     }
   };

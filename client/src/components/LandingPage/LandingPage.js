@@ -10,6 +10,11 @@ export const LandingPage = () => {
 
   const [isLoggedIn, setLogin] = useState(false);
 
+  const GetLoginState = (success) => {
+    console.log("loggedIn? ", success);
+    setLogin(success);
+  };
+
   return (
     <Router>
       <CssBaseline />
@@ -19,7 +24,7 @@ export const LandingPage = () => {
         ) : (
           <div>
             <Box className={classes.name}>CoviConnect</Box>
-            <Login />
+            <Login GetLoginState={GetLoginState} />
           </div>
         )}
       </div>
