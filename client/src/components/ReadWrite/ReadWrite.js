@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ButtonBase, Typography } from "@material-ui/core";
 import { Write } from "./Write/Write";
+import { Read } from "./Read/Read";
 import { Link } from "react-router-dom";
 import useStyles from "./Styles";
 
@@ -45,6 +46,8 @@ export const ReadWrite = () => {
               key="Read about others experience"
               className={classes.image}
               focusVisibleClassName={classes.focusVisible}
+              component={Link}
+              to={"/read"}
             >
               <span
                 className={classes.imageSrc}
@@ -69,6 +72,7 @@ export const ReadWrite = () => {
           </div>
         </Route>
         <Route path="/write" component={Write} />
+        <Route path="/read" component={Read} />
       </Switch>
     </Router>
   );
