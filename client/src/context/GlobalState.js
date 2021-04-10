@@ -49,11 +49,12 @@ export const GlobalProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
     };
-    // console.log("Base64: ", entry);
+    if (entry !== undefined) console.log("entry: ", entry.base64file);
 
     try {
       const res = await axios.post(
-        "https://aqueous-plains-64390.herokuapp.com/api/user/addVaccineData",
+        "https://aqueous-plains-64390.herokuapp.com/api/user/addVaccineData?token=" +
+          state.token[0].token,
         entry,
         config
       );
