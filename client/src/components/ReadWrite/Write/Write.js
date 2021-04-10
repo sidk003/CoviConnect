@@ -1,24 +1,47 @@
+// import React from "react";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import { Covid } from "./Covid/Covid";
+// import { Vaccine } from "./Vaccine/Vaccine";
+// import useStyles from "./Styles";
+
+// export const Write = () => {
+//   const classes = useStyles();
+//   return (
+//     <Router>
+//       <Switch>
+//         <Route path="/vaccine">
+//           <Vaccine path="/vaccine" component={Vaccine} />
+//         </Route>
+//         <Route path="/covid">
+//           <Covid path="/covid" component={Covid} />
+//         </Route>
+//       </Switch>
+//     </Router>
+//   );
+// };
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ButtonBase, Typography } from "@material-ui/core";
-import { Write } from "./Write/Write";
 import { Link } from "react-router-dom";
 import useStyles from "./Styles";
+import { Vaccine } from "./Vaccine/Vaccine";
+import { Covid } from "./Covid/Covid";
 
-export const ReadWrite = () => {
+export const Write = () => {
   const classes = useStyles();
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route path="/write">
           <div className={classes.root}>
             <ButtonBase
               focusRipple
-              key="Write about your experience"
+              key="Vaccine"
               className={classes.image}
               focusVisibleClassName={classes.focusVisible}
               component={Link}
-              to={"/write"}
+              to={"/vaccine"}
             >
               <span
                 className={classes.imageSrc}
@@ -35,16 +58,18 @@ export const ReadWrite = () => {
                   color="inherit"
                   className={classes.imageTitle}
                 >
-                  Write about your experience
+                  Vaccine
                   <span className={classes.imageMarked} />
                 </Typography>
               </span>
             </ButtonBase>
             <ButtonBase
               focusRipple
-              key="Read about others experience"
+              key="covid"
               className={classes.image}
               focusVisibleClassName={classes.focusVisible}
+              component={Link}
+              to={"/covid"}
             >
               <span
                 className={classes.imageSrc}
@@ -61,14 +86,15 @@ export const ReadWrite = () => {
                   color="inherit"
                   className={classes.imageTitle}
                 >
-                  Read about others experience
+                  COVID
                   <span className={classes.imageMarked} />
                 </Typography>
               </span>
             </ButtonBase>
           </div>
         </Route>
-        <Route path="/write" component={Write} />
+        <Route path="/vaccine" component={Vaccine} />
+        <Route path="/covid" component={Covid} />
       </Switch>
     </Router>
   );
