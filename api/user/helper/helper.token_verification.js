@@ -2,14 +2,10 @@ var jwt = require("jsonwebtoken");
 
 module.exports.tokenVerification = function () {
     return (req, res, next) => {
-      const bearerHeader = req.headers["authorization"];
+      const token = req.query.token;
   
-      if (bearerHeader) {
-        //if header present then retrieve token
-        const bearer = bearerHeader.split(" ");
-  
-        const bearerToken = bearer[1];
-        req.token = bearerToken;
+      if (token) {
+        req.token = token;
   
         jwt.verify(req.token, process.env.JWT_SECRET , (err, authdata) => {
           if (err) {
