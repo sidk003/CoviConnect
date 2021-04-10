@@ -10,7 +10,6 @@ Repository for MNNIT Hack 36
 ## Introduction:
   The aim is to build a webapp to improve the availability of information regarding COVID and provide a platform where people can share their experiences to help others having similar problems be it related to the disease itself or the vaccination process.
   
-## Problem that our project addresses
   
 ## Demo Video Link:
   <a href="">demo video link</a>
@@ -20,6 +19,12 @@ Repository for MNNIT Hack 36
   
   
 ## Table of Contents:
+1. Problem that our project addresses
+2. Technology Stack
+3. Contributors
+4. Instructions
+
+## Problem that our project addresses
 
 ## Technology Stack:
   1) Node.JS
