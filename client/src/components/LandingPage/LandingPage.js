@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, CssBaseline } from "@material-ui/core";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Login } from "./Login/Login";
 import { ReadWrite } from "../ReadWrite/ReadWrite";
 import useStyles from "./Styles";
