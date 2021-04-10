@@ -55,7 +55,7 @@ export const GlobalProvider = ({ children }) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/user/login",
+        "https://aqueous-plains-64390.herokuapp.com/api/user/login",
         entry,
         config
       );
