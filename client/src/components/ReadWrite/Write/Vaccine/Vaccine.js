@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginBottom: theme.spacing(3),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -97,7 +98,7 @@ export const Vaccine = () => {
                   fullWidth
                   id="firstName"
                   label="First Name"
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -134,7 +135,7 @@ export const Vaccine = () => {
                   id="occupation"
                   label="Occupation"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
 
@@ -147,7 +148,7 @@ export const Vaccine = () => {
                   id="locationAddress"
                   label="Address Line"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
 
@@ -161,7 +162,7 @@ export const Vaccine = () => {
                   id="locationCity"
                   label="City"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -174,7 +175,7 @@ export const Vaccine = () => {
                   id="locationState"
                   label="State"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -188,7 +189,7 @@ export const Vaccine = () => {
                   id="locationPincode"
                   label="Pincode"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
 
@@ -202,7 +203,7 @@ export const Vaccine = () => {
                   id="vaccineTaken"
                   label="Vaccine Taken"
                   // helperText="Name of Vaccine taken."
-                  autoFocus
+                  // autoFocus
                   select
                 >
                   <MenuItem value="CoviShield">Covishield</MenuItem>
@@ -225,7 +226,7 @@ export const Vaccine = () => {
                   id="dosesTaken"
                   label="Doses Taken"
                   // helperText="Name of Hospital/Institution for taking vaccine. "
-                  autoFocus
+                  // autoFocus
                   select
                 >
                   <MenuItem value="1">1</MenuItem>
@@ -242,7 +243,7 @@ export const Vaccine = () => {
                   id="hospitalName"
                   label="Hospital Name"
                   helperText="Name of Hospital/Institution for taking vaccine. "
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
               <Grid item xs={12}>
@@ -268,7 +269,7 @@ export const Vaccine = () => {
                   id="symptoms"
                   label="Symptoms"
                   helperText="Symptoms/Conditions after taking vaccine. "
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
 
@@ -283,7 +284,7 @@ export const Vaccine = () => {
                   id="medicinesTaken"
                   label="Medicines Taken"
                   helperText="Medicines taken to overcome symptoms."
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
 
@@ -298,7 +299,7 @@ export const Vaccine = () => {
                   id="comments"
                   label="Additional Comments"
                   // helperText="Medicines taken to overcome symptoms."
-                  autoFocus
+                  // autoFocus
                 />
               </Grid>
 

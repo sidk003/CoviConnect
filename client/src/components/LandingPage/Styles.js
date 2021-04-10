@@ -1,5 +1,6 @@
 import { blue } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
+import { MaxKey } from "bson";
 
 export default makeStyles((theme) => ({
   "@global": {
@@ -15,7 +16,7 @@ export default makeStyles((theme) => ({
   },
   root: {
     display: "flex",
-    height: "100vh",
+    minHeight: "100vh",
     background:
       "linear-gradient(left,  rgba(211,211,211,1) 0%, rgba(225,225,225,1) 100%)",
   },
