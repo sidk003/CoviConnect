@@ -1,104 +1,99 @@
 const Data = require("../../model/covidData");
 const ocrSpace = require('ocr-space-api-wrapper');
 var jwt = require("jsonwebtoken");
-const multer = require ('multer');
-const path = require ('path');
 
-const storageEngine = multer.diskStorage ({
-    destination: './public/uploads/',
-    filename: function (req, file, callback) {
-      callback (
-        null,
-        file.fieldname + '-' + Date.now () + path.extname (file.originalname)
-      );
-    },
-  });
-
-  const fileFilter = (req, file, callback) => {
-    let pattern = /pdf/; // reqex
-
-    if (pattern.test (path.extname (file.originalname))) {
-      callback (null, true);
-    } else {
-      callback ('Error: not a valid file');
-    }
-  };
-
-  const upload = multer ({
-    storage: storageEngine,
-    fileFilter: fileFilter,
-  });
 
 exports.addCovidData = async (req,res) => {
-    const { username,name,age,occupation,doctorName,doctorMobile,doctorRating,treatment,recoveryPeriod,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState } = req.body;
+    const { username,fname,lname,age,occupation,doctorName,doctorMobile,doctorRating,treatment,recoveryPeriod,hospital,hospitalAddress,locationPinCode,symptoms,medicinesTaken,comments,locationAddress,locationCity,locationState } = req.body;
     //const {   } = req.body;
     try{
-        let user = await Data.create({
-            username,
-            name,
-            age,
-            occupation,
-            doctorName,
-            doctorMobile,
-            doctorRating,
-            treatment,
-            recoveryPeriod,
-            hospital,
-            hospitalAddress,
-            symptoms,
-            medicinesTaken,
-            comments,
-            locationAddress,
-            locationCity,
-            locationPinCode,
-            locationState,
-        });
-        return res.status(200).json({
-            success: true,
-            data: user,
-        });
-    }
-    catch(e){
-        if(e.code === 11000){
+        const url = process.env.URL;
+        const res3 = await ocrSpace( process.env.URL, { apiKey: 'bd623620c088957', isTable : true})
+        var parsedText = res3.ParsedResults[0].ParsedText;
+        console.log(parsedText);
+        if( (parsedText.indexOf(fname) !== -1) && (parsedText.indexOf(lname))  ) {
             try{
-                let response = await Data.updateOne(
-                    {username},
-                    {
-                        $set: {
-                            name,
-                            age,
-                            occupation,
-                            doctorName,
-                            doctorMobile,
-                            doctorRating,
-                            treatment,
-                            recoveryPeriod,
-                            hospital,
-                            hospitalAddress,
-                            symptoms,
-                            medicinesTaken,
-                            comments,
-                            locationAddress,
-                            locationCity,
-                            locationPinCode,
-                            locationState
-                        }
-                        
-                    }
-                )
+                let user = await Data.create({
+                    username,
+                    fname,
+                    lname,
+                    age,
+                    occupation,
+                    doctorName,
+                    doctorMobile,
+                    doctorRating,
+                    treatment,
+                    recoveryPeriod,
+                    hospital,
+                    hospitalAddress,
+                    symptoms,
+                    medicinesTaken,
+                    comments,
+                    locationAddress,
+                    locationCity,
+                    locationPinCode,
+                    locationState,
+                });
                 return res.status(200).json({
                     success: true,
-                    data: response,
+                    data: user,
                 });
             }
-            catch(error){
-                return res.status(401).json({ error: 'Something went wrong' });
+            catch(e){
+                if(e.code === 11000){
+                    try{
+                        let response = await Data.updateOne(
+                            {username},
+                            {
+                                $set: {
+                                    fname,
+                                    lname,
+                                    age,
+                                    occupation,
+                                    doctorName,
+                                    doctorMobile,
+                                    doctorRating,
+                                    treatment,
+                                    recoveryPeriod,
+                                    hospital,
+                                    hospitalAddress,
+                                    symptoms,
+                                    medicinesTaken,
+                                    comments,
+                                    locationAddress,
+                                    locationCity,
+                                    locationPinCode,
+                                    locationState
+                                }
+                                
+                            }
+                        )
+                        return res.status(200).json({
+                            success: true,
+                            data: response,
+                        });
+                    }
+                    catch(error){
+                        return res.status(401).json({ error: 'Something went wrong' });
+                    }
+                }
+                else{
+                    return res.status(401).json({ error: 'Something went wrong' });
+                }
+                
             }
         }
         else{
-            return res.status(401).json({ error: 'Something went wrong' });
+            return res.status(204).json({
+                message : "name does not match with report"
+            });
         }
-        
+    }
+    catch (error) {
+        console.log(error)
+        return res.json({
+            data:error
+        });
     }
 }
 
@@ -181,15 +176,4 @@ exports.getCovidData = async (req,res) =>{
                 return res.status(404).json({ error: 'Something went wrong' })
             }       
         }
-}
-
-exports.uploadFile = async(req,res) => {
-    try{
-        await upload.single ('uploadedFile');
-            console.log(req.file)
-            res.json (req.file).status (200);
-    }
-    catch(e){
-        return res.status(404).json({ error: 'Something went wrong' })
-    }
 }
