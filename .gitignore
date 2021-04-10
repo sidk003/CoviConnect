@@ -1,4 +1,3 @@
 node_modules
 .vscode
-.env
 api\user\helper\helper.token_verification.js
