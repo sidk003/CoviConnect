@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, CssBaseline, Divider } from "@material-ui/core";
+import { Box, CssBaseline } from "@material-ui/core";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Login } from "./Login/Login";
 import useStyles from "./Styles";
 
@@ -7,13 +8,16 @@ export const LandingPage = () => {
   const classes = useStyles();
 
   return (
-    <>
+    <Router>
       <CssBaseline />
-      <div className={classes.root}>
-        <Box className={classes.name}>CoviConnect</Box>
-        {/* <Divider className={classes.divider} orientation="vertical" flexItem /> */}
-        <Login />
-      </div>
-    </>
+      <Switch>
+        <Route exact path="/">
+          <div className={classes.root}>
+            <Box className={classes.name}>CoviConnect</Box>
+            <Login />
+          </div>
+        </Route>
+      </Switch>
+    </Router>
   );
 };

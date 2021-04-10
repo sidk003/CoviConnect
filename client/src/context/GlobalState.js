@@ -7,6 +7,7 @@ const initialState = {
   entry: [],
   error: null,
   loading: true,
+  token: "",
 };
 
 // Create context
@@ -52,20 +53,19 @@ export const GlobalProvider = ({ children }) => {
       },
     };
 
-    // console.log("email pass: ", entry);
-
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/user/userLogin",
+        "http://localhost:4000/api/user/login",
         entry,
         config
       );
-      // console.log("Response: ", res.data.data);
+      // console.log("Response: ", res.data);
       dispatch({
         type: "ADD_ENTRY",
-        payload: res.data.data,
+        payload: res.data,
       });
     } catch (err) {
+      // console.log(err.response.data.error);
       dispatch({
         type: "ENTRY_ERROR",
         payload: err.response,
@@ -80,6 +80,7 @@ export const GlobalProvider = ({ children }) => {
         loading: state.loading,
         entry: state.entry,
         userLogin,
+        token: state.token,
       }}
     >
       {children}

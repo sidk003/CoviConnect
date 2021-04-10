@@ -10,7 +10,7 @@ export const Login = () => {
   return (
     <div className={classes.login}>
       <Router>
-        <div className="App">
+        <div>
           <Route path="/" exact component={SigninSide} />
           <Route exact path="/signup" component={SignupSide} />
         </div>

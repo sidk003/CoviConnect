@@ -45,7 +45,24 @@ const SignInSide = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { userLogin } = useContext(GlobalContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isPromise, setPromise] = useState(false);
+  const { userLogin, token, error } = useContext(GlobalContext);
+
+  const handleLogin = (response) => {
+    // setErrorMessage(error.data.error);
+    let possiblePromise = response;
+    setPromise(possiblePromise instanceof Promise);
+
+    if (error) {
+      setErrorMessage(error.data.error);
+      console.log(errorMessage);
+    }
+    if (token) {
+      setErrorMessage("Login Successful");
+      console.log(token);
+    }
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -54,7 +71,12 @@ const SignInSide = () => {
       username,
       password,
     };
-    userLogin(newEntry);
+    const response = userLogin(newEntry);
+    handleLogin(response);
+    // let possiblePromise = userLogin(newEntry);
+    // let isPromise = possiblePromise instanceof Promise;
+    // console.log(isPromise);
+    // if (isPromise) handleLogin();
   };
 
   return (
@@ -64,9 +86,14 @@ const SignInSide = () => {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
+        {isPromise ? (
+          <h3 className="error"> {errorMessage} </h3>
+        ) : (
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+        )}
+
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"

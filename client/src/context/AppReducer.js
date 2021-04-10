@@ -4,7 +4,7 @@ export default (state, action) => {
     case "ADD_ENTRY":
       return {
         ...state,
-        entries: [action.payload],
+        token: [action.payload],
       };
 
     case "ENTRY_ERROR":
