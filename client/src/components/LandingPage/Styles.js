@@ -1,3 +1,4 @@
+import { blue } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
@@ -16,13 +17,14 @@ export default makeStyles((theme) => ({
     display: "flex",
     height: "100vh",
     background:
-      "linear-gradient(left,  rgba(47,100,90,1) 0%, rgba(111,161,123,1) 100%)",
+      "linear-gradient(left,  rgba(211,211,211,1) 0%, rgba(225,225,225,1) 100%)",
   },
   name: {
-    fontSize: 62,
+    fontSize: 82,
     marginTop: 250,
-    marginLeft: 150,
-    fontFamily: "Arial",
+    marginLeft: 100,
+    color: "rgba(63, 81, 181,1)",
+    fontFamily: "Pacifico",
   },
   //   divider: {
   //     marginLeft: 50,
