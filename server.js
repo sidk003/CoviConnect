@@ -5,7 +5,8 @@ const connecToDB = require("./config/db");
 const router = require("./api/user/app.router");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-const bodyParser  = require('body-parser');
+var multer = require('multer')
+var cors = require('cors');
 
 connecToDB();
 const app = express();
@@ -24,6 +25,7 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cors())
 app.use(function (req, res, next) {
   // Mentioning content types
   //res.setHeader("Content-Type", "application/json; charset=UTF-8");
@@ -43,7 +45,28 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+  cb(null, 'public')
+},
+filename: function (req, file, cb) {
+  cb(null, Date.now() + '-' +file.originalname )
+}
+})
+var upload = multer({ storage: storage }).single('file')
+app.post('/upload',function(req, res) {
+     
+  upload(req, res, function (err) {
+         if (err instanceof multer.MulterError) {
+             return res.status(500).json(err)
+         } else if (err) {
+             return res.status(500).json(err)
+         }
+    return res.status(200).send(req.file)
 
+  })
+
+});
 app.use("/api/user", router);
 
 server.listen(port, console.log(`Server running on port ${port}`));
