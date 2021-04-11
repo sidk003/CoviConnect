@@ -47,15 +47,30 @@ const useStyles = makeStyles((theme) => ({
 
 export const Covid = () => {
   const classes = useStyles();
-  const [baseImage, setBaseImage] = useState("");
+  // const [baseImage, setBaseImage] = useState("");
+  const [fname, setFName] = useState("");
+  const [lname, setLName] = useState("");
+  const [age, setAge] = useState(null);
+  const [occupation, setOccupation] = useState("");
+  const [locationAddress, setLocationAdress] = useState("");
+  const [locationCity, setLocationCity] = useState("");
+  const [locationState, setLocationState] = useState("");
+  const [locationPinCode, setlocationPinCode] = useState("");
+  const [vaccineTaken, setVaccineTaken] = useState("");
+  const [dosesTaken, setDosesTaken] = useState("");
+  const [hospital, setHospital] = useState("");
+  const [hospitalAddress, setHospitalAddress] = useState("");
+  const [symptoms, setSymptoms] = useState("");
+  const [medicinesTaken, setMedicinesTaken] = useState("");
+  const [comments, setComments] = useState("");
   const [doctorRating, setRating] = useState(1);
 
   const uploadImage = async (e) => {
     //console.log(e.target.files[0]) ;
     const file = e.target.files[0];
     const base64file = await convertBase64(file);
-    console.log(base64file);
-    setBaseImage(base64file);
+    // console.log(base64file);
+    // setBaseImage(base64file);
   };
 
   const convertBase64 = (file) => {
@@ -91,6 +106,7 @@ export const Covid = () => {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={(e) => setFName(e.target.value)}
                   // autoFocus
                 />
               </Grid>
@@ -103,6 +119,7 @@ export const Covid = () => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
+                  onChange={(e) => setLName(e.target.value)}
                 />
               </Grid>
 
@@ -116,6 +133,7 @@ export const Covid = () => {
                   label="Age"
                   name="age"
                   autoComplete="age"
+                  onChange={(e) => setAge(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={9}>
@@ -127,6 +145,7 @@ export const Covid = () => {
                   fullWidth
                   id="occupation"
                   label="Occupation"
+                  onChange={(e) => setOccupation(e.target.value)}
                   // helperText="Name of Hospital/Institution for taking vaccine. "
                   // autoFocus
                 />
@@ -140,6 +159,7 @@ export const Covid = () => {
                   fullWidth
                   id="locationAddress"
                   label="Address Line"
+                  onChange={(e) => setLocationAdress(e.target.value)}
                   // helperText="Name of Hospital/Institution for taking vaccine. "
                   // autoFocus
                 />
@@ -154,6 +174,7 @@ export const Covid = () => {
                   fullWidth
                   id="locationCity"
                   label="City"
+                  onChange={(e) => setLocationCity(e.target.value)}
                   // helperText="Name of Hospital/Institution for taking vaccine. "
                   // autoFocus
                 />
@@ -167,6 +188,7 @@ export const Covid = () => {
                   fullWidth
                   id="locationState"
                   label="State"
+                  onChange={(e) => setLocationState(e.target.value)}
                   // helperText="Name of Hospital/Institution for taking vaccine. "
                   // autoFocus
                 />
@@ -181,6 +203,7 @@ export const Covid = () => {
                   fullWidth
                   id="locationPincode"
                   label="Pincode"
+                  onChange={(e) => setlocationPinCode(e.target.value)}
                   // helperText="Name of Hospital/Institution for taking vaccine. "
                   // autoFocus
                 />

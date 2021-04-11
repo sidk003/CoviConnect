@@ -61,12 +61,20 @@ export const Vaccine = () => {
   const [comments, setComments] = useState("");
 
   // const [baseImage, setBaseImage] = useState("");
-  const { addVaccineData, token } = useContext(GlobalContext);
+  const { addVaccineData, token, addFile } = useContext(GlobalContext);
   // console.log("Token auth: ", token);
   var base64file = "";
   const uploadImage = async (e) => {
     //console.log(e.target.files[0]) ;
     const file = e.target.files[0];
+    const data = new FormData();
+    data.append("file", file);
+    const newEntry = {
+      file,
+    };
+    const response = addFile(newEntry);
+    addFile(response);
+
     base64file = await convertBase64(file);
     // setBaseImage(base64file);
     // console.log("Token64: ", base64file);

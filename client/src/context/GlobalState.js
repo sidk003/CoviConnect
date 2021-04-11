@@ -49,12 +49,38 @@ export const GlobalProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
     };
-    if (entry !== undefined) console.log("entry: ", entry.base64file);
 
     try {
       const res = await axios.post(
         "https://aqueous-plains-64390.herokuapp.com/api/user/addVaccineData?token=" +
           state.token[0].token,
+        entry,
+        config
+      );
+
+      dispatch({
+        type: "ADD_ENTRY",
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "ENTRY_ERROR",
+        payload: err.response,
+      });
+    }
+  }
+
+  // For file
+  async function addFile(entry) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    console.log("File: ", entry);
+    try {
+      const res = await axios.post(
+        "http://localhost:4000/upload",
         entry,
         config
       );
@@ -80,6 +106,7 @@ export const GlobalProvider = ({ children }) => {
         userLogin,
         token: state.token,
         addVaccineData,
+        addFile,
       }}
     >
       {children}
