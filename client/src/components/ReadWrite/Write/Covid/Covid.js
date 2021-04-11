@@ -1,4 +1,4 @@
-import React , { useState } from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Button,
@@ -14,8 +14,7 @@ import {
   Select,
   MenuItem,
 } from "@material-ui/core";
-import Rating from '@material-ui/lab/Rating';
-
+import Rating from "@material-ui/lab/Rating";
 
 const useStyles = makeStyles((theme) => ({
   "@global": {
@@ -24,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   root: {
-    alignItems: "center" ,
+    alignItems: "center",
   },
   paper: {
     marginTop: theme.spacing(3),
@@ -49,29 +48,28 @@ const useStyles = makeStyles((theme) => ({
 export const Covid = () => {
   const classes = useStyles();
   const [baseImage, setBaseImage] = useState("");
-  const [doctorRating, setRating] = useState(1) ;
+  const [doctorRating, setRating] = useState(1);
 
   const uploadImage = async (e) => {
     //console.log(e.target.files[0]) ;
     const file = e.target.files[0];
-    const base64file = await convertBase64(file) ;
-    console.log(base64file) ;
-    setBaseImage(base64file) ;
+    const base64file = await convertBase64(file);
+    console.log(base64file);
+    setBaseImage(base64file);
   };
-  
+
   const convertBase64 = (file) => {
-    return new Promise((resolve,reject)=>{
-      const fileReader = new FileReader() ;
-      fileReader.readAsDataURL(file) ;
-  
-      fileReader.onload = ()=>{
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
         resolve(fileReader.result);
       };
-  
-      fileReader.onerror = (error)=>{
-        reject(error) ;
+
+      fileReader.onerror = (error) => {
+        reject(error);
       };
-  
     });
   };
   return (
@@ -187,7 +185,7 @@ export const Covid = () => {
                   // autoFocus
                 />
               </Grid>
-              
+
               <Grid item xs={12} sm={7}>
                 <TextField
                   autoComplete="doctorName"
@@ -246,6 +244,7 @@ export const Covid = () => {
                   name="symptoms"
                   variant="outlined"
                   fullWidth
+                  required
                   multiline
                   rows={4}
                   id="symptoms"
@@ -262,6 +261,7 @@ export const Covid = () => {
                   variant="outlined"
                   fullWidth
                   multiline
+                  required
                   rows={4}
                   id="medicinesTaken"
                   label="Medicines Taken"
@@ -307,6 +307,7 @@ export const Covid = () => {
                     name="recoveryPeriod"
                     variant="outlined"
                     fullWidth
+                    required
                     type="number"
                     id="recoveryPeriod"
                     label="Recovery Period"
@@ -326,20 +327,19 @@ export const Covid = () => {
                     }}
                   />
                 </Grid>
-              </Grid>              
-              
+              </Grid>
+
               <Grid item xs={12} sm={6}>
                 Please upload COVID PCR Report for Verification:
               </Grid>
               <Grid item xs={12} sm={6}>
-                <input 
+                <input
                   type="file"
                   onChange={(e) => {
                     uploadImage(e);
                   }}
                 />
               </Grid>
-
             </Grid>
             <Button
               type="submit"
@@ -360,8 +360,7 @@ export const Covid = () => {
           </form>
         </div>
         <Box mt={5}></Box>
-      </Card>  
+      </Card>
     </Container>
-    
   );
 };

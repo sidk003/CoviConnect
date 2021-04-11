@@ -42,6 +42,34 @@ export const GlobalProvider = ({ children }) => {
       });
     }
   }
+  // base64 token
+  async function addVaccineData(entry) {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    if (entry !== undefined) console.log("entry: ", entry.base64file);
+
+    try {
+      const res = await axios.post(
+        "https://aqueous-plains-64390.herokuapp.com/api/user/addVaccineData?token=" +
+          state.token[0].token,
+        entry,
+        config
+      );
+
+      dispatch({
+        type: "ADD_ENTRY",
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "ENTRY_ERROR",
+        payload: err.response,
+      });
+    }
+  }
 
   return (
     <GlobalContext.Provider
@@ -51,6 +79,7 @@ export const GlobalProvider = ({ children }) => {
         entry: state.entry,
         userLogin,
         token: state.token,
+        addVaccineData,
       }}
     >
       {children}
