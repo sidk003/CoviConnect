@@ -12,7 +12,7 @@ Repository for MNNIT Hack 36
   
   
 ## Demo Video Link:
-  <a href="">demo video link</a>
+  <a href="">demo video link: https://drive.google.com/file/d/1Us1HDMQCRxy9t646loxAYt0KWwVqYkFg/view?usp=sharing</a>
   
 ## Presentation Link:
   <a href="https://docs.google.com/presentation/d/163uLX6LQYaGAjG1qFL13yjDf3COW0RStEXrxFhl8INw/edit?usp=sharing"> PPT Link </a>
