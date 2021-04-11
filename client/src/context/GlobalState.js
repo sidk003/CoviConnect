@@ -4,6 +4,7 @@ import axios from "axios";
 
 // initial state
 const initialState = {
+  aboutVaccine: [],
   entry: [],
   error: null,
   loading: true,
@@ -18,6 +19,25 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
+  // Get request vaccine
+  async function getAboutVaccine() {
+    try {
+      const res = await axios.get(
+        "http://localhost:4000/api/user/getVaccineData"
+      );
+      console.log("vaccine from global: ", res.data.data);
+      dispatch({
+        type: "GET_DATA",
+        payload: res.data.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: "DATA_ERROR",
+        payload: err.response,
+      });
+    }
+  }
+
   async function userLogin(entry) {
     const config = {
       headers: {
@@ -49,10 +69,9 @@ export const GlobalProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
     };
-
     try {
       const res = await axios.post(
-        "https://aqueous-plains-64390.herokuapp.com/api/user/addVaccineData?token=" +
+        "http://localhost:4000/api/user/addVaccineData?token=" +
           state.token[0].token,
         entry,
         config
@@ -77,7 +96,7 @@ export const GlobalProvider = ({ children }) => {
         "Content-Type": "application/json",
       },
     };
-    console.log("File: ", entry);
+    // console.log("File: ", entry);
     try {
       const res = await axios.post(
         "http://localhost:4000/upload",
@@ -107,6 +126,8 @@ export const GlobalProvider = ({ children }) => {
         token: state.token,
         addVaccineData,
         addFile,
+        aboutVaccine: state.aboutVaccine,
+        getAboutVaccine,
       }}
     >
       {children}
